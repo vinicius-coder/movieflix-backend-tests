@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -25,12 +27,16 @@ public class Movie implements Serializable{
 	
 	@Column(columnDefinition = "TEXT")
 	private String synopsis;
+	
+	@ManyToOne
+	@JoinColumn(name = "genre_id")
+	private Genre genre;
 
 	public Movie() {
 
 	}
 
-	public Movie(Long id, String title, String subTitle, Integer year, String imgUrl, String synopsis) {
+	public Movie(Long id, String title, String subTitle, Integer year, String imgUrl, String synopsis, Genre genre) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -38,6 +44,7 @@ public class Movie implements Serializable{
 		this.year = year;
 		this.imgUrl = imgUrl;
 		this.synopsis = synopsis;
+		this.genre = genre;
 	}
 
 	public Long getId() {
@@ -86,6 +93,14 @@ public class Movie implements Serializable{
 
 	public void setSynopsis(String synopsis) {
 		this.synopsis = synopsis;
+	}
+	
+	public Genre getGenre() {
+		return genre;
+	}
+
+	public void setGenre(Genre genre) {
+		this.genre = genre;
 	}
 
 	@Override

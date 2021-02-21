@@ -2,15 +2,21 @@ package com.devsuperior.movieflix.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 import com.devsuperior.movieflix.entities.Genre;
 
-public class GenreDTO  implements Serializable {
+public class GenreDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private Long id;
-	private String name;
 	
+	@Size(min = 5, max = 60, message = "Gênero deve ter entre 5 a 60 caracteres")
+	@NotBlank(message = "Campo obrigatório")
+	private String name;
+
 	public GenreDTO() {
 		
 	}
@@ -19,12 +25,12 @@ public class GenreDTO  implements Serializable {
 		this.id = id;
 		this.name = name;
 	}
-	
+
 	public GenreDTO(Genre entity) {
 		id = entity.getId();
 		name = entity.getName();
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -40,5 +46,5 @@ public class GenreDTO  implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 }
