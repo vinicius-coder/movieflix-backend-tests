@@ -13,8 +13,8 @@ public class GenreDTO implements Serializable {
 
 	private Long id;
 	
-	@Size(min = 5, max = 60, message = "Gênero deve ter entre 5 a 60 caracteres")
-	@NotBlank(message = "Campo obrigatório")
+	@Size(min=5, max=60, message="Gênero deve ter entre 5 a 60 caracteres")
+	@NotBlank(message="Campo obrigatório")
 	private String name;
 
 	public GenreDTO() {

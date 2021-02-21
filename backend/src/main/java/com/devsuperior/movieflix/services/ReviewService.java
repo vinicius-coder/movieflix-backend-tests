@@ -12,47 +12,47 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.devsuperior.movieflix.dto.GenreDTO;
-import com.devsuperior.movieflix.entities.Genre;
-import com.devsuperior.movieflix.repositories.GenreRepository;
+import com.devsuperior.movieflix.dto.ReviewDTO;
+import com.devsuperior.movieflix.entities.Review;
+import com.devsuperior.movieflix.repositories.ReviewRepository;
 import com.devsuperior.movieflix.services.exceptions.DatabaseException;
 import com.devsuperior.movieflix.services.exceptions.ResourceNotFoundException;
 
 @Service
-public class GenreService {
+public class ReviewService {
 
 	@Autowired
-	private GenreRepository repository;
+	private ReviewRepository repository;
 
 	@Transactional(readOnly = true)
-	public Page<GenreDTO> findAllPaged(PageRequest pageRequest) {
-		Page<Genre> list = repository.findAll(pageRequest);
-		return list.map(x -> new GenreDTO(x));
+	public Page<ReviewDTO> findAllPaged(PageRequest pageRequest) {
+		Page<Review> list = repository.findAll(pageRequest);
+		return list.map(x -> new ReviewDTO(x));
 	}
 
 	@Transactional(readOnly = true)
-	public GenreDTO findById(Long id) {
-		Optional<Genre> obj = repository.findById(id);
-		Genre entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
-		return new GenreDTO(entity);
+	public ReviewDTO findById(Long id) {
+		Optional<Review> obj = repository.findById(id);
+		Review entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
+		return new ReviewDTO(entity);
 	}
 
 	@Transactional
-	public GenreDTO insert(GenreDTO dto) {
-		Genre entity = new Genre();
+	public ReviewDTO insert(ReviewDTO dto) {
+		Review entity = new Review();
 		entity.setName(dto.getName());
 		entity = repository.save(entity);
-		return new GenreDTO(entity);
+		return new ReviewDTO(entity);
 	}
 
 	@Transactional
-	public GenreDTO update(Long id, GenreDTO dto) {
+	public ReviewDTO update(Long id, ReviewDTO dto) {
 
 		try {
-			Genre entity = repository.getOne(id);
+			Review entity = repository.getOne(id);
 			entity.setName(dto.getName());
 			entity = repository.save(entity);
-			return new GenreDTO(entity);
+			return new ReviewDTO(entity);
 		} catch (EntityNotFoundException e) {
 			throw new ResourceNotFoundException("Id not found " + id);
 		}
