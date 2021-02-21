@@ -12,3 +12,6 @@ INSERT INTO tb_user_role (user_id, role_id) VALUES (2, 2);
 INSERT INTO tb_user_role (user_id, role_id) VALUES (3, 1);
 INSERT INTO tb_user_role (user_id, role_id) VALUES (3, 2);
 INSERT INTO tb_user_role (user_id, role_id) VALUES (3, 3);
+
+INSERT INTO tb_movie (title, sub_title, year, img_url, synopsis) VALUES ('Bad Boys 3', 'ola mundo', 2019, 'https://www.themoviedb.org/t/p/w533_and_h300_bestv2/upUy2QhMZEmtypPW3PdieKLAHxh.jpg', 'Armando é um assassino de sangue frio com uma natureza cruel e provocadora. Ele está comprometido com o trabalho do cartel e é enviado por sua mãe para matar Mike (Smith). Nuñez assumirá o papel de Rita, psicóloga criminal durona e engraçada que é recém-nomeada chefe da AMMO e é ex-namorada de Mike.');
+
