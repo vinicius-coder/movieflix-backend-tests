@@ -33,7 +33,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
 	
 	private static final String[] OPERATOR_OR_ADMIN = { "/movies/**", "/genres/**" };
 	
-	private static final String[] ADMIN = { "/users/**" };
+	private static final String[] ADMIN = { "/users/**,", "/movies/**" };
 	
 	@Override
 	public void configure(ResourceServerSecurityConfigurer resources) throws Exception {

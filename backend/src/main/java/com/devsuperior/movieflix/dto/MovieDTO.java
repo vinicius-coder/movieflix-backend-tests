@@ -6,8 +6,9 @@ import java.util.List;
 import java.util.Set;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
+import com.devsuperior.movieflix.entities.Genre;
 import com.devsuperior.movieflix.entities.Movie;
 import com.devsuperior.movieflix.entities.Review;
 
@@ -17,13 +18,25 @@ public class MovieDTO implements Serializable {
 	
 	private Long id;
 	
-	@NotEmpty
-	@NotBlank(message = "Campo obrigatório")
+	@Size(min=2, max=60, message="Gênero deve ter entre 2 a 60 caracteres")
+	@NotBlank(message="Campo obrigatório")
 	private String title;
+	
+	@Size(min=5, max=60, message="Subtitulo deve ter entre 5 a 60 caracteres")
+	@NotBlank(message="Campo obrigatório")
 	private String subTitle;
+	
 	private Integer year;
+	
+	@Size(min=5, message="Url da imagem deve ter entre 5 a 120 caracteres")
+	@NotBlank(message="Campo obrigatório")
 	private String imgUrl;
+	
+	@Size(min=5, message="Gênero deve ter entre 5 a 60 caracteres")
+	@NotBlank(message="Campo obrigatório")
 	private String synopsis;
+	
+	private GenreDTO genre;
 	
 	private List<ReviewDTO> reviews = new ArrayList<>();
 	
@@ -50,11 +63,17 @@ public class MovieDTO implements Serializable {
 		this.synopsis = entity.getSynopsis();
 	}
 	
-	public MovieDTO(Movie entity, Set<Review> reviews) {
+	public MovieDTO(Movie entity, Set<Review> reviews, Genre genre) {
 		this(entity);
 		reviews.forEach(rev -> this.reviews.add(new ReviewDTO(rev)));
+		this.genre = new GenreDTO(genre);
 	}
-
+	
+	public MovieDTO(Movie entity, Genre genre) {
+		this(entity);
+		this.genre = new GenreDTO(genre);
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -105,6 +124,14 @@ public class MovieDTO implements Serializable {
 
 	public List<ReviewDTO> getReviews() {
 		return reviews;
+	}
+	
+	public GenreDTO getGenre() {
+		return genre;
+	}
+
+	public void setGenre(GenreDTO genre) {
+		this.genre = genre;
 	}
 	
 	@Override
