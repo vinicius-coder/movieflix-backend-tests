@@ -8,7 +8,9 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import com.devsuperior.movieflix.entities.Movie;
 import com.devsuperior.movieflix.entities.Review;
+import com.devsuperior.movieflix.entities.User;
 
 public class ReviewDTO implements Serializable{
 	
@@ -21,6 +23,9 @@ public class ReviewDTO implements Serializable{
 	@Size(min=5, max=60, message="Review deve ter entre 5 a 60 caracteres")
 	@NotBlank(message = "Campo obrigatório")
 	private String name;
+	
+	private MovieDTO movie;
+	private UserDTO user;
 
 	public ReviewDTO() {
 		
@@ -34,6 +39,12 @@ public class ReviewDTO implements Serializable{
 	public ReviewDTO(Review entity) {
 		id = entity.getId();
 		name = entity.getName();
+	}
+	
+	public ReviewDTO(Review entity, User user, Movie movie) {
+		this(entity);
+		this.user = new UserDTO(user.getId(), user.getName(), user.getEmail());
+		this.movie = new MovieDTO(movie);
 	}
 
 	public Long getId() {
@@ -50,6 +61,18 @@ public class ReviewDTO implements Serializable{
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public UserDTO getUser() {
+		return user;
+	}
+
+	public void setUser(UserDTO user) {
+		this.user = user;
+	}
+	
+	public MovieDTO getMovie() {
+		return movie;
 	}
 	
 	@Override
