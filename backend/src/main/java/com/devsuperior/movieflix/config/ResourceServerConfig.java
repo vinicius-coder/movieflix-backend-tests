@@ -35,7 +35,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
 
 	private static final String[] REVIEWS = { "/reviews/" };
 	
-	private static final String[] MEMBER = { "/users/**", "/movies/**", "/genres/**", "/reviews/" };
+	private static final String[] MEMBER = { "/users/**", "/movies/**", "/genres/**"};
 	
 	@Override
 	public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
@@ -53,7 +53,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
 		http.authorizeRequests()
 		.antMatchers(PUBLIC).permitAll()
 		.antMatchers(HttpMethod.GET, VISITOR).permitAll()
-		.antMatchers(REVIEWS).hasRole("VISITOR")
+		.antMatchers(REVIEWS).hasAnyRole("VISITOR", "MEMBER")
 		.antMatchers(MEMBER).hasRole("MEMBER")
 		.anyRequest().authenticated();
 		

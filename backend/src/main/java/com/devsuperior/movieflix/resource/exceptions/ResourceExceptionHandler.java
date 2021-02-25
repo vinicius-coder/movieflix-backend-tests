@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.devsuperior.movieflix.services.exceptions.DatabaseException;
+import com.devsuperior.movieflix.services.exceptions.ForbiddenException;
 import com.devsuperior.movieflix.services.exceptions.ResourceNotFoundException;
 
 @ControllerAdvice
@@ -70,5 +71,19 @@ public class ResourceExceptionHandler {
 		err.setPath(request.getRequestURI());
 		return ResponseEntity.status(status).body(err);
 	}
+	
+	@ExceptionHandler(ForbiddenException.class)
+	public ResponseEntity<StandardError> Forbidden(ForbiddenException e, HttpServletRequest request){
+		HttpStatus status = HttpStatus.UNAUTHORIZED;
+		StandardError err = new StandardError();
+		err.setTimestamp(Instant.now());
+		err.setStatus(status.value());
+		err.setError("Bad Request");
+		err.setMessage(e.getMessage());
+		err.setPath(request.getRequestURI());
+		return ResponseEntity.status(status).body(err);
+	}
+	
+	
 	
 }

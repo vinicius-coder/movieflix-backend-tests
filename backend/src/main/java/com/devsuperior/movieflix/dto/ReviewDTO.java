@@ -20,7 +20,7 @@ public class ReviewDTO implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Size(min=5, max=60, message="Review deve ter entre 5 a 60 caracteres")
+	@Size(min=2, max=100, message="Review deve ter entre 2 a 100 caracteres")
 	@NotBlank(message = "Campo obrigatório")
 	private String text;
 	
@@ -40,6 +40,7 @@ public class ReviewDTO implements Serializable{
 		id = entity.getId();
 		text = entity.getText();
 		movieId = entity.getMovie().getId();
+		user = new UserDTO(entity.getUser().getId(), entity.getUser().getName(), entity.getUser().getEmail());
 	}
 	
 	public ReviewDTO(Review entity, User user, Movie movie) {
