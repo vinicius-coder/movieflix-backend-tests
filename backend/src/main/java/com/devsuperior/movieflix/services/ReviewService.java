@@ -18,7 +18,9 @@ import com.devsuperior.movieflix.dto.ReviewDTO;
 import com.devsuperior.movieflix.entities.Movie;
 import com.devsuperior.movieflix.entities.Review;
 import com.devsuperior.movieflix.entities.User;
+import com.devsuperior.movieflix.repositories.MovieRepository;
 import com.devsuperior.movieflix.repositories.ReviewRepository;
+import com.devsuperior.movieflix.repositories.UserRepository;
 import com.devsuperior.movieflix.services.exceptions.DatabaseException;
 import com.devsuperior.movieflix.services.exceptions.ResourceNotFoundException;
 
@@ -28,10 +30,16 @@ public class ReviewService {
 	@Autowired
 	private ReviewRepository repository;
 
+	@Autowired
+	private MovieRepository movieRepository;
+
+	@Autowired
+	private UserRepository userRepository;
+
 	@Transactional(readOnly = true)
 	public Page<ReviewDTO> findAllPaged(PageRequest pageRequest) {
 		Page<Review> list = repository.findAll(pageRequest);
-		return list.map(x -> new ReviewDTO(x, x.getUser(), x.getMovie()));
+		return list.map(x -> new ReviewDTO(x));
 	}
 
 	@Transactional(readOnly = true)
@@ -41,7 +49,7 @@ public class ReviewService {
 
 		List<ReviewDTO> listDTO = new ArrayList<>();
 		for (Review x : list) {
-			listDTO.add(new ReviewDTO(x, x.getUser(), x.getMovie()));
+			listDTO.add(new ReviewDTO(x));
 		}
 
 		return listDTO;
@@ -51,7 +59,7 @@ public class ReviewService {
 	public ReviewDTO findById(Long id) {
 		Optional<Review> obj = repository.findById(id);
 		Review entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
-		return new ReviewDTO(entity, entity.getUser(), entity.getMovie());
+		return new ReviewDTO(entity);
 	}
 
 	@Transactional
@@ -59,7 +67,7 @@ public class ReviewService {
 		Review entity = new Review();
 		copyDtoToEntity(dto, entity);
 		entity = repository.save(entity);
-		return new ReviewDTO(entity, entity.getUser(), entity.getMovie());
+		return new ReviewDTO(entity);
 	}
 
 	@Transactional
@@ -88,15 +96,15 @@ public class ReviewService {
 	}
 
 	private void copyDtoToEntity(ReviewDTO dto, Review entity) {
+		
 		entity.setText(dto.getText());
 
 		Movie movie = new Movie();
-		movie.setId(dto.getMovieId());
-		;
+		movie = movieRepository.getOne(dto.getMovieId());
 		entity.setMovie(movie);
 
 		User user = new User();
-		user.setId(dto.getUser().getId());
+		user = userRepository.getOne(dto.getUser().getId());
 		entity.setUser(user);
 	}
 

@@ -6,11 +6,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.devsuperior.movieflix.entities.Movie;
 import com.devsuperior.movieflix.entities.Review;
-import com.devsuperior.movieflix.entities.User;
 
 public class ReviewDTO implements Serializable{
 	
@@ -20,6 +19,7 @@ public class ReviewDTO implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotNull
 	@Size(min=2, max=100, message="Review deve ter entre 2 a 100 caracteres")
 	@NotBlank(message = "Campo obrigatório")
 	private String text;
@@ -41,12 +41,6 @@ public class ReviewDTO implements Serializable{
 		text = entity.getText();
 		movieId = entity.getMovie().getId();
 		user = new UserDTO(entity.getUser().getId(), entity.getUser().getName(), entity.getUser().getEmail());
-	}
-	
-	public ReviewDTO(Review entity, User user, Movie movie) {
-		this(entity);
-		this.user = new UserDTO(user.getId(), user.getName(), user.getEmail());
-		this.movieId = movie.getId();
 	}
 
 	public Long getId() {
