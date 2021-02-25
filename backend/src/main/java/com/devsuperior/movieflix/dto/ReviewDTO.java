@@ -22,29 +22,30 @@ public class ReviewDTO implements Serializable{
 	
 	@Size(min=5, max=60, message="Review deve ter entre 5 a 60 caracteres")
 	@NotBlank(message = "Campo obrigatório")
-	private String name;
+	private String text;
 	
-	private MovieDTO movie;
+	private Long movieId;
 	private UserDTO user;
 
 	public ReviewDTO() {
 		
 	}
 
-	public ReviewDTO(Long id, String name) {
+	public ReviewDTO(Long id, String text) {
 		this.id = id;
-		this.name = name;
+		this.text = text;
 	}
 	
 	public ReviewDTO(Review entity) {
 		id = entity.getId();
-		name = entity.getName();
+		text = entity.getText();
+		movieId = entity.getMovie().getId();
 	}
 	
 	public ReviewDTO(Review entity, User user, Movie movie) {
 		this(entity);
 		this.user = new UserDTO(user.getId(), user.getName(), user.getEmail());
-		this.movie = new MovieDTO(movie);
+		this.movieId = movie.getId();
 	}
 
 	public Long getId() {
@@ -55,12 +56,12 @@ public class ReviewDTO implements Serializable{
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getText() {
+		return text;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setText(String text) {
+		this.text = text;
 	}
 
 	public UserDTO getUser() {
@@ -71,8 +72,12 @@ public class ReviewDTO implements Serializable{
 		this.user = user;
 	}
 	
-	public MovieDTO getMovie() {
-		return movie;
+	public Long getMovieId() {
+		return movieId;
+	}
+	
+	public void setMovieId(Long movieId) {
+		this.movieId = movieId;
 	}
 	
 	@Override

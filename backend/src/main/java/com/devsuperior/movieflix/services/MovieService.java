@@ -84,7 +84,7 @@ public class MovieService {
 		entity.setImgUrl(dto.getImgUrl());
 		entity.setSynopsis(dto.getSynopsis());
 		
-		Genre genre = genreRepository.getOne(dto.getGenre().getId());
+		Genre genre = genreRepository.getOne(dto.getGenreId());
 		entity.setGenre(genre);
 	}
 

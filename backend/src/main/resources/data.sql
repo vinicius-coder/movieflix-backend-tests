@@ -1,18 +1,12 @@
-INSERT INTO tb_user (name, email, password) VALUES ('Alex Brown', 'alex@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
 INSERT INTO tb_user (name, email, password) VALUES ('Bob Brown', 'bob@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
-INSERT INTO tb_user (name, email, password) VALUES ('Maria Green', 'maria@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
+INSERT INTO tb_user (name, email, password) VALUES ('Ana Green', 'ana@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
 
-INSERT INTO tb_role (authority) VALUES ('ROLE_OPERATOR');
 INSERT INTO tb_role (authority) VALUES ('ROLE_VISITOR');
-INSERT INTO tb_role (authority) VALUES ('ROLE_ADMIN');
+INSERT INTO tb_role (authority) VALUES ('ROLE_MEMBER');
 
 INSERT INTO tb_user_role (user_id, role_id) VALUES (1, 1);
 INSERT INTO tb_user_role (user_id, role_id) VALUES (2, 1);
 INSERT INTO tb_user_role (user_id, role_id) VALUES (2, 2);
-INSERT INTO tb_user_role (user_id, role_id) VALUES (3, 1);
-INSERT INTO tb_user_role (user_id, role_id) VALUES (3, 2);
-INSERT INTO tb_user_role (user_id, role_id) VALUES (3, 3);
-
 
 INSERT INTO tb_genre (name) VALUES ('Aventura');
 INSERT INTO tb_genre (name) VALUES ('Ação');
@@ -27,10 +21,10 @@ INSERT INTO tb_movie (title, sub_title, year, img_url, synopsis, genre_id) VALUE
 INSERT INTO tb_movie (title, sub_title, year, img_url, synopsis, genre_id) VALUES ('Bleach', '', 2004, 'https://www.themoviedb.org/t/p/w533_and_h300_bestv2/v6UxyiDx9HRCieUZDFfhawPU37u.jpg', 'Ichigo Kurosaki é um garoto de 15 anos que tem uma estranha capacidade de ver, tocar e falar com espíritos de pessoas mortas. Logo que a shinigami Rukia Kuchiki toma conhecimento dos poderes de Ichigo, vai atrás dele para investigar, e acaba em uma luta com um Hollow que foi atraído pelo forte poder espiritual de Ichigo. Antes de ser derrotada pela criatura, Rukia passa seus poderes a Ichigo, o qual se torna um shinigami, e após derrotar o Hollow ingressa em uma jornada para proteger os humanos e os espíritos da ameaça dos Hollows.', 5);
 INSERT INTO tb_movie (title, sub_title, year, img_url, synopsis, genre_id) VALUES ('The Mandalorian', '', 2019, 'https://www.themoviedb.org/t/p/w500_and_h282_face/vQqdGF9rPBzyTDwJjZWWeoCYFgp.jpg', 'A saga de um guerreiro solitário, que também é um mercenário e pistoleiro, viajando pelos territórios esquecidos e marginais do espaço, logo após a queda do Império e antes da criação da temida Primeira Ordem.', 2);
 
-INSERT INTO tb_review (name, movie_id, user_id) VALUES ('Ótimo anime, recomendo!', 5, 1);
-INSERT INTO tb_review (name, movie_id, user_id) VALUES ('Filme é horrível, o careca já foi melhor!', 2, 2);
-INSERT INTO tb_review (name, movie_id, user_id) VALUES ('A série mistura ação com comédia, super recomendo!', 6, 2);
-INSERT INTO tb_review (name, movie_id, user_id) VALUES ('Disney de parabéns!!!!!', 6, 3);
+INSERT INTO tb_review (text, movie_id, user_id) VALUES ('Ótimo anime, recomendo!', 5, 1);
+INSERT INTO tb_review (text, movie_id, user_id) VALUES ('Filme é horrível, o careca já foi melhor!', 2, 2);
+INSERT INTO tb_review (text, movie_id, user_id) VALUES ('A série mistura ação com comédia, super recomendo!', 6, 2);
+INSERT INTO tb_review (text, movie_id, user_id) VALUES ('Disney de parabéns!!!!!', 6, 1);
 
 
 

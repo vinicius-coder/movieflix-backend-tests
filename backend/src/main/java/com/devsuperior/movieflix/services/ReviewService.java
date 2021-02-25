@@ -1,5 +1,7 @@
 package com.devsuperior.movieflix.services;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
@@ -33,6 +35,19 @@ public class ReviewService {
 	}
 
 	@Transactional(readOnly = true)
+	public List<ReviewDTO> findAll() {
+		List<Review> list = new ArrayList<>();
+		list = repository.findAll();
+
+		List<ReviewDTO> listDTO = new ArrayList<>();
+		for (Review x : list) {
+			listDTO.add(new ReviewDTO(x, x.getUser(), x.getMovie()));
+		}
+
+		return listDTO;
+	}
+
+	@Transactional(readOnly = true)
 	public ReviewDTO findById(Long id) {
 		Optional<Review> obj = repository.findById(id);
 		Review entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
@@ -44,7 +59,7 @@ public class ReviewService {
 		Review entity = new Review();
 		copyDtoToEntity(dto, entity);
 		entity = repository.save(entity);
-		return new ReviewDTO(entity);
+		return new ReviewDTO(entity, entity.getUser(), entity.getMovie());
 	}
 
 	@Transactional
@@ -71,14 +86,15 @@ public class ReviewService {
 		}
 
 	}
-	
+
 	private void copyDtoToEntity(ReviewDTO dto, Review entity) {
-		entity.setName(dto.getName());
-		
+		entity.setText(dto.getText());
+
 		Movie movie = new Movie();
-		movie.setId(dto.getMovie().getId());;
+		movie.setId(dto.getMovieId());
+		;
 		entity.setMovie(movie);
-		
+
 		User user = new User();
 		user.setId(dto.getUser().getId());
 		entity.setUser(user);
