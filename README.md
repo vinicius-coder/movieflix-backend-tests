@@ -1,8 +1,10 @@
 # MovieFlix
 
+[![NPM](https://img.shields.io/npm/l/react)](https://github.com/vinicius-coder/movieflix-backend-tests/blob/main/LICENSE)
+
 # Sobre o projeto
 
-A aplicação consiste em apresentar um catálogo de filmes, onde os usuários podem postar suas avaliações sobre os filmes. 
+MovieFlix é um sistema desenvolvido no Bootcamp [DevSuperior] no ano de 2020, a aplicação consiste em apresentar um catálogo de filmes, onde os usuários podem postar suas avaliações sobre os filmes. Até o momento desenvolvi apenas o backend com Springboot, estou iniciando a construção do frontend agora. aguardem por mais novidades.
 
 # Tecnologias utilizadas
 ## Back end
