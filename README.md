@@ -1,5 +1,4 @@
-# MovieFlix 
-[![NPM](https://img.shields.io/npm/l/react)](https://github.com/neliocursos/exemplo-readme/blob/main/LICENSE) 
+# MovieFlix
 
 # Sobre o projeto
 
@@ -19,7 +18,7 @@ Pré-requisitos: Java 11
 
 ```bash
 # clonar repositório
-git clone https://github.com/devsuperior/sds1-wmazoni
+git clone https://github.com/vinicius-coder/movieflix-backend-tests.git
 
 # entrar na pasta do projeto back end
 cd backend
